@@ -156,7 +156,7 @@ deploy_desktop() {
     git clone --local --no-hardlinks "$config_source" \
         "$TARGET$home/.local/debianzfs-config"
     git -C "$TARGET$home/.local/debianzfs-config" remote set-url origin \
-        https://github.com/foelkdavid/debianzfs-config.git
+        https://github.com/DebianZFS/config.git
     git -C "$TARGET$home/.local/debianzfs-config" checkout -B main HEAD
     git -C "$TARGET$home/.local/debianzfs-config" config branch.main.remote origin
     git -C "$TARGET$home/.local/debianzfs-config" config branch.main.merge refs/heads/main

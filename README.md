@@ -1,4 +1,4 @@
-# Debian ZFS installer
+# DebianZFS
 
 An interactive, all-in-one Debian 13 Trixie installer for amd64 UEFI systems,
 with optional Hyprland and Noctalia deployment. Based on
@@ -6,10 +6,34 @@ with optional Hyprland and Noctalia deployment. Based on
 way to use it is the prebuilt live image; standard Debian 13 live media remains
 supported too.
 
+## Repositories
+
+- [`DebianZFS/debianzfs`](https://github.com/DebianZFS/debianzfs): live image
+  builder, installer, package deployment and system services.
+- [`DebianZFS/config`](https://github.com/DebianZFS/config): desktop dotfiles
+  and user setup, pinned here as the `debianzfs-config` submodule.
+
+Existing checkouts can switch without changing local directory names:
+
+```sh
+git remote set-url origin git@github.com:DebianZFS/debianzfs.git
+git pull --ff-only
+git submodule sync --recursive
+git submodule update --init --recursive
+```
+
+On existing desktop installations, update the configuration remote separately:
+
+```sh
+git -C ~/.local/debianzfs-config remote set-url origin https://github.com/DebianZFS/config.git
+```
+
+Local configuration paths and the `debianzfs-install` command remain unchanged.
+
 ## Prebuilt live image
 
 Every `v*` tag builds an amd64 UEFI live ISO and publishes it with a SHA-256
-checksum to a [GitHub Release](https://github.com/foelkdavid/debianzfs-install/releases).
+checksum to a [GitHub Release](https://github.com/DebianZFS/debianzfs/releases).
 The ISO boots into the bundled Hyprland/Noctalia desktop and includes the
 installer, ZFS tools and module, a Debian bootstrap archive, and an APT package
 repository containing the current desktop packages for all five GPU profiles.
@@ -49,8 +73,8 @@ Run it from an official Debian 13 **live** image, with internet access:
 ```sh
 sudo apt-get update
 sudo apt-get install git ca-certificates curl
-git clone --recurse-submodules https://github.com/foelkdavid/debianzfs-install
-cd debianzfs-install
+git clone --recurse-submodules https://github.com/DebianZFS/debianzfs.git
+cd debianzfs
 sudo ./install.sh
 ```
 

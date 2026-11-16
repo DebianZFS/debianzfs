@@ -31,12 +31,12 @@ apt-get install -y --no-install-recommends ca-certificates curl git
 # makes image builds reproducible while letting them consume a config release
 # newer than the installer submodule's fallback pin.
 config_tag=$(git ls-remote --tags --refs --sort=-version:refname \
-    https://github.com/foelkdavid/debianzfs-config.git 'v*' |
+    https://github.com/DebianZFS/config.git 'v*' |
     sed -n '1s|.*refs/tags/||p')
 [[ -n $config_tag ]] || { echo 'No debianzfs-config version tag is available.' >&2; exit 1; }
 rm -rf -- "$CONFIG_SOURCE_DIR"
 git clone --branch "$config_tag" \
-    https://github.com/foelkdavid/debianzfs-config.git "$CONFIG_SOURCE_DIR"
+    https://github.com/DebianZFS/config.git "$CONFIG_SOURCE_DIR"
 printf 'Using debianzfs-config tag %s in this image.\n' "$config_tag"
 
 rm -rf -- "$CONFIG_ROOT"
@@ -171,7 +171,7 @@ install -d -o liveuser -g liveuser -m 755 /home/liveuser/.local
 git clone --local --no-hardlinks /opt/debianzfs-config \
     /home/liveuser/.local/debianzfs-config
 git -C /home/liveuser/.local/debianzfs-config remote set-url origin \
-    https://github.com/foelkdavid/debianzfs-config.git
+    https://github.com/DebianZFS/config.git
 git -C /home/liveuser/.local/debianzfs-config checkout -B main HEAD
 git -C /home/liveuser/.local/debianzfs-config config branch.main.remote origin
 git -C /home/liveuser/.local/debianzfs-config config branch.main.merge refs/heads/main

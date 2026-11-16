@@ -46,6 +46,17 @@ trap 'exit 130' INT
 trap 'exit 143' TERM
 '''
 
+    def test_organization_config_sources(self):
+        url = "https://github.com/DebianZFS/config.git"
+        for path in (".gitmodules", "lib/target.sh", "image/build.sh"):
+            with self.subTest(path=path):
+                text = (REPO / path).read_text()
+                self.assertIn(url, text)
+                self.assertNotIn("foelkdavid/debianzfs-config", text)
+        readme = (REPO / "README.md").read_text()
+        self.assertIn("https://github.com/DebianZFS/debianzfs.git", readme)
+        self.assertIn("https://github.com/DebianZFS/debianzfs/releases", readme)
+
     def test_desktop_profiles_and_no(self):
         for profile in ("intel", "amd", "nvidia", "nouveau", "vm"):
             extra = "vmware\ny\n" if profile == "vm" else ""

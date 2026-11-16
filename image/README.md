@@ -3,7 +3,7 @@
 `build.sh` builds the amd64 Debian 13 Trixie UEFI live ISO. The live desktop is
 configured by the bundled `deploy/deploy.sh`, package arrays in
 `deploy/vars.sh`, and the newest published version tag in
-`foelkdavid/debianzfs-config` for user files. The installer submodule supplies
+`DebianZFS/config` for user files. The installer submodule supplies
 a fallback snapshot; image builds resolve the latest `v*` config tag at build
 time and bundle that tagged checkout for both live and installed users.
 The live session uses the Intel
